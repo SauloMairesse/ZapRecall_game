@@ -98,24 +98,49 @@ export default function TelaPerguntas() {
           <p> {array.map(iconeNomeHTML => <IconesCheck corDoIcone={iconeNomeHTML} iconeNOME = {iconeNomeHTML}/>)}</p>
         </footer>)</>)}
   else{
-    return (
-            <>
-              <header>
-                  <img src="ZapRecall-Recursos/logo.png" alt="logo"/>
-                  <h1>ZapRecall</h1>
-              </header>
+    if(array.includes('close-circle')){
+      return (
+              <>
+                <header>
+                    <img src="ZapRecall-Recursos/logo.png" alt="logo"/>
+                    <h1>ZapRecall</h1>
+                </header>
 
-              <main>
-                {perguntasINFO.map(perguntaHTML => <Pergunta  numPergunta={perguntaHTML.numPergunta} 
-                                                              pergunta={perguntaHTML.pergunta}  
-                                                              resposta={perguntaHTML.resposta} 
-                                                              setArray={setArray} 
-                                                              array={array} />)}
-              </main>
+                <main>
+                  {perguntasINFO.map(perguntaHTML => <Pergunta  numPergunta={perguntaHTML.numPergunta} 
+                                                                pergunta={perguntaHTML.pergunta}  
+                                                                resposta={perguntaHTML.resposta} 
+                                                                setArray={setArray} 
+                                                                array={array} />)}
+                </main>
 
-              <footer>
-                <p> {array.length}/{perguntasINFO.length}</p>
-                <p> {array.map(iconeNomeHTML => <IconesCheck corDoIcone={iconeNomeHTML} iconeNOME = {iconeNomeHTML}/>)}</p>
-              </footer>
-            </>)}
+                <footer>
+                  <p> <span>😢</span> Puts !</p>
+                  <p> Ainda faltaram alguns... Mas não desanime! </p>
+                  <p> {array.map(iconeNomeHTML => <IconesCheck corDoIcone={iconeNomeHTML} iconeNOME = {iconeNomeHTML}/>)}</p>
+                </footer>
+              </>)}
+    else{
+      return (
+        <>
+          <header>
+              <img src="ZapRecall-Recursos/logo.png" alt="logo"/>
+              <h1>ZapRecall</h1>
+          </header>
+
+          <main>
+            {perguntasINFO.map(perguntaHTML => <Pergunta  numPergunta={perguntaHTML.numPergunta} 
+                                                          pergunta={perguntaHTML.pergunta}  
+                                                          resposta={perguntaHTML.resposta} 
+                                                          setArray={setArray} 
+                                                          array={array} />)}
+          </main>
+
+          <footer>
+            <p className="resultado-gabarito"> <span>🥳</span> Parabéns !</p>
+            <p> Você não esqueceu de nenhum flashcard! </p>
+            <p> {array.map(iconeNomeHTML => <IconesCheck corDoIcone={iconeNomeHTML} iconeNOME = {iconeNomeHTML}/>)}</p>
+          </footer>
+        </>)}
+  }
 }
