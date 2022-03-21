@@ -4,19 +4,17 @@ import React from "react"
 
 export default function App(){
     const [estadoPaginaUm, setEstadoPaginaUm] = React.useState(0)
+    // const [numRespondidos, setNumRespondidos] = React.useState(0)
 
     if(estadoPaginaUm === 0){
         return(
             <>
                 <TelaInicial setEstadoPaginaUm = {setEstadoPaginaUm}/>
-            </>
-        )
-    }
+            </>)}
     if(estadoPaginaUm === 1 ){
     return(
         <>
             {/* <TelaInicial/> */}
             <TelaPerguntas/>
-        </>
-    )}
+        </>)}
 }
