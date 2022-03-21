@@ -11,6 +11,10 @@ const perguntasINFO =    [{numPergunta: "1", pergunta: "Oque é JSX ?", resposta
 
 let arrayNomeIcones = [];
 
+function IconesCheck(props){
+  return(
+    <ion-icon class={props.corDoIcone} name={props.iconeNOME}></ion-icon>)}
+
 function Pergunta(props){
   const [telaPergunta, setTelaPergunta] = React.useState(0);
   const [perguntaRespondida, setPerguntaRespondida] = React.useState('')
@@ -67,15 +71,8 @@ function Pergunta(props){
       </div>)}
 }
 
-function IconesCheck(props){
-  return(
-    <ion-icon class={props.corDoIcone} name={props.iconeNOME}></ion-icon>)}
-
 export default function TelaPerguntas() {
   const [array, setArray] = React.useState([])
-  const totalQuestoes = perguntasINFO.length;
-  const totalRespondidas = arrayNomeIcones.length;
-
 
   if((array.length) < (perguntasINFO.length)){
     return (
@@ -123,6 +120,7 @@ export default function TelaPerguntas() {
     else{
       return (
         <>
+        
           <header>
               <img src="ZapRecall-Recursos/logo.png" alt="logo"/>
               <h1>ZapRecall</h1>
@@ -141,6 +139,7 @@ export default function TelaPerguntas() {
             <p> Você não esqueceu de nenhum flashcard! </p>
             <p> {array.map(iconeNomeHTML => <IconesCheck corDoIcone={iconeNomeHTML} iconeNOME = {iconeNomeHTML}/>)}</p>
           </footer>
+
         </>)}
   }
 }
