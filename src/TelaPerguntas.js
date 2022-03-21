@@ -9,14 +9,15 @@ const perguntasINFO =    [{numPergunta: "1", pergunta: "Oque é JSX ?", resposta
                           {numPergunta: "7", pergunta: "Usamos props para ...", resposta: " passar diferentes informações para componentes "},
                           {numPergunta: "8", pergunta: "Usamos estado (state) para ...", resposta: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"}]
 
-function Pergunta(props){
+let arrayNomeIcones = [];
 
+function Pergunta(props){
   const [telaPergunta, setTelaPergunta] = React.useState(0);
   const [perguntaRespondida, setPerguntaRespondida] = React.useState('')
   const [nomeIcone, setNomeIcone] = React.useState("play-outline")
 
   const classPrimeiraTelaCSS = `pergunta-primeira-tela ${perguntaRespondida}`
-  
+
   if(telaPergunta === 0 ){
     return(
       <div className="pergunta">
@@ -41,54 +42,80 @@ function Pergunta(props){
         <div className="resposta-pergunta">
           <p> {props.resposta} </p>
           <div className="opcoes">
+
             <div onClick = {() => {setTelaPergunta(0) 
                                   setPerguntaRespondida('resposta-nao')
-                                  setNomeIcone('close-circle')}}
+                                  setNomeIcone('close-circle')
+                                  props.setArray([...props.array, 'close-circle'])}}
                                               className="nao-lembrei"><p>Não lembrei!</p>
             </div>
             <div onClick = {() => {setTelaPergunta(0) 
                                   setPerguntaRespondida('resposta-quase')
-                                  setNomeIcone('help-circle')}}
+                                  setNomeIcone('help-circle')
+                                  props.setArray([...props.array, 'help-circle'])}}
                                               className="quase-nao-lembrei"><p>Quase não Lembrei</p>
             </div>
             <div onClick = {() => {setTelaPergunta(0) 
                                   setPerguntaRespondida('resposta-zap')
-                                  setNomeIcone('checkmark-circle')}} className="zap"><p>Zap!</p>
+                                  setNomeIcone('checkmark-circle')
+                                  props.setArray([...props.array, 'checkmark-circle'])}}
+                                              className="zap"><p>Zap!</p>
             </div>
+
           </div>
         </div>
       </div>)}
 }
 
-export default function TelaPerguntas(){
-  const totalQuestoes = perguntasINFO.length
-  return (
-          <>
-            <header>
-                <img src="ZapRecall-Recursos/logo.png" alt="logo"/>
-                <h1>ZapRecall</h1>
-            </header>
-            <main>
-              {perguntasINFO.map(perguntaHTML => <Pergunta numPergunta={perguntaHTML.numPergunta} pergunta={perguntaHTML.pergunta}  resposta={perguntaHTML.resposta}/>)}
-            </main>
+function IconesCheck(props){
+  return(
+    <ion-icon class={props.corDoIcone} name={props.iconeNOME}></ion-icon>)}
 
-            {/* <footer>
-              <p className="resultado-gabarito"><span>😢</span> <strong>PUTZ!</strong> </p>
-              <p className="mensagem-gabarito">Ainda faltaram alguns...Mas não desanime!</p>
-              <p className="icones-gabarito"><ion-icon name='checkmark-circle'></ion-icon> <ion-icon name='checkmark-circle'></ion-icon></p>
-            </footer> */}
+export default function TelaPerguntas() {
+  const [array, setArray] = React.useState([])
+  const totalQuestoes = perguntasINFO.length;
+  const totalRespondidas = arrayNomeIcones.length;
 
-            <footer>
-              <p className="resultado-gabarito"><span>🥳</span> <strong>PARABÉNS!</strong> </p>
-              <p className="mensagem-gabarito">Você não esqueceu de nenhum flashcard!</p>
-              <p className="icones-gabarito"><ion-icon name='checkmark-circle'></ion-icon> <ion-icon name='checkmark-circle'></ion-icon></p>
-            </footer>
-            
-            {/* <footer>
-              <p>QResp/{totalQuestoes} CONCLUÍDOS</p>
-            </footer> */}
-          </>)}
 
-// <footer>
-// <p>QResp/{totalQuestoes} CONCLUÍDOS</p>
-// </footer> kjçkjbkjbkj
+  if((array.length) < (perguntasINFO.length)){
+    return (
+      <>
+        <header>
+            <img src="ZapRecall-Recursos/logo.png" alt="logo"/>
+            <h1>ZapRecall</h1>
+        </header>
+
+        <main>
+          {perguntasINFO.map(perguntaHTML => <Pergunta  numPergunta={perguntaHTML.numPergunta} 
+                                                        pergunta={perguntaHTML.pergunta}  
+                                                        resposta={perguntaHTML.resposta} 
+                                                        setArray={setArray} 
+                                                        array={array} />)}
+        </main>
+
+        <footer>
+          <p> {array.length}/{perguntasINFO.length}</p>
+          <p> {array.map(iconeNomeHTML => <IconesCheck corDoIcone={iconeNomeHTML} iconeNOME = {iconeNomeHTML}/>)}</p>
+        </footer>)</>)}
+  else{
+    return (
+            <>
+              <header>
+                  <img src="ZapRecall-Recursos/logo.png" alt="logo"/>
+                  <h1>ZapRecall</h1>
+              </header>
+
+              <main>
+                {perguntasINFO.map(perguntaHTML => <Pergunta  numPergunta={perguntaHTML.numPergunta} 
+                                                              pergunta={perguntaHTML.pergunta}  
+                                                              resposta={perguntaHTML.resposta} 
+                                                              setArray={setArray} 
+                                                              array={array} />)}
+              </main>
+
+              <footer>
+                <p> {array.length}/{perguntasINFO.length}</p>
+                <p> {array.map(iconeNomeHTML => <IconesCheck corDoIcone={iconeNomeHTML} iconeNOME = {iconeNomeHTML}/>)}</p>
+              </footer>
+            </>)}
+}

@@ -161,15 +161,15 @@ header h1{
 .resposta-zap, .resposta-quase, .resposta-nao{
     text-decoration: line-through;
 }
-.resposta-zap p, .resposta-zap {
+.resposta-zap p, .resposta-zap, .checkmark-circle {
     text-decoration-color: #2FBE34;
     color: #2FBE34;
 }
-.resposta-quase, .resposta-quase p{
+.resposta-quase, .resposta-quase p, .help-circle{
     text-decoration-color: #FF922E;
     color: #FF922E;
 }
-.resposta-nao p, .resposta-nao {
+.resposta-nao p, .resposta-nao, .close-circle {
     text-decoration-color: #FF3030;
     color: #FF3030;
 }
